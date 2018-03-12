@@ -40,35 +40,35 @@ void State::print() {
 vector<State>* State::Successor(State* state) {
   if(boat == 0) {
     //Two Missionaries Cross
-    State* new_state = new State(state->boat, state->cannLeft, state->missLeft-2, state->cannRight, state->missRight+2);
+    State* new_state = new State(state->boat+1, state->cannLeft, state->missLeft-2, state->cannRight, state->missRight+2);
     if(isValidState(new_state)) {
       new_state->parent = state;
       state->addChild(new_state);
     }
     delete new_state;
     //Two Cannibals Cross
-    new_state = new State(state->boat, state->cannLeft-2, state->missLeft, state->cannRight+2, state->missRight);
+    new_state = new State(state->boat+1, state->cannLeft-2, state->missLeft, state->cannRight+2, state->missRight);
     if(isValidState(new_state)) {
       new_state->parent = state;
       state->addChild(new_state);
     }
     delete new_state;
     //Missionary and Cannibal Cross
-    new_state = new State(state->boat, state->cannLeft-1, state->missLeft-1, state->cannRight+1, state->missRight+1);
+    new_state = new State(state->boat+1, state->cannLeft-1, state->missLeft-1, state->cannRight+1, state->missRight+1);
     if(isValidState(new_state)) {
       new_state->parent = state;
       state->addChild(new_state);
     }
     delete new_state;
     //Single Missionary Crosses
-    new_state = new State(state->boat, state->cannLeft, state->missLeft-1, state->cannRight, state->missRight+1);
+    new_state = new State(state->boat+1, state->cannLeft, state->missLeft-1, state->cannRight, state->missRight+1);
     if(isValidState(new_state)) {
       new_state->parent = state;
       state->addChild(new_state);
     }
     delete new_state;
     //Single Cannibal Crosses
-    new_state = new State(state->boat, state->cannLeft-1, state->missLeft, state->cannRight+1, state->missRight);
+    new_state = new State(state->boat+1, state->cannLeft-1, state->missLeft, state->cannRight+1, state->missRight);
     if(isValidState(new_state)) {
       new_state->parent = state;
       state->addChild(new_state);
@@ -76,35 +76,35 @@ vector<State>* State::Successor(State* state) {
     delete new_state;
   } else {
     //Two Missionaries return
-    State* new_state = new State(state->boat, state->cannLeft, state->missLeft+2, state->cannRight, state->missRight-2);
+    State* new_state = new State(state->boat-1, state->cannLeft, state->missLeft+2, state->cannRight, state->missRight-2);
     if(isValidState(new_state)) {
       new_state->parent = state;
       state->addChild(new_state);
     }
     delete new_state;
     //Two Cannibals Return
-    new_state = new State(state->boat, state->cannLeft+2, state->missLeft, state->cannRight-2, state->missRight);
+    new_state = new State(state->boat-1, state->cannLeft+2, state->missLeft, state->cannRight-2, state->missRight);
     if(isValidState(new_state)) {
       new_state->parent = state;
       state->addChild(new_state);
     }
     delete new_state;
     //Missionary and Cannibal Return
-    new_state = new State(state->boat, state->cannLeft-1, state->missLeft+1, state->cannRight-1, state->missRight+1);
+    new_state = new State(state->boat-1, state->cannLeft-1, state->missLeft+1, state->cannRight-1, state->missRight+1);
     if(isValidState(new_state)) {
       new_state->parent = state;
       state->addChild(new_state);
     }
     delete new_state;
     //Single Missionary Returns
-    new_state = new State(state->boat, state->cannLeft, state->missLeft+1, state->cannRight, state->missRight-1);
+    new_state = new State(state->boat-1, state->cannLeft, state->missLeft+1, state->cannRight, state->missRight-1);
     if(isValidState(new_state)) {
       new_state->parent = state;
       state->addChild(new_state);
     }
     delete new_state;
     //Single Cannibal Returns
-    new_state = new State(state->boat, state->cannLeft+1, state->missLeft, state->cannRight-1, state->missRight);
+    new_state = new State(state->boat-1, state->cannLeft+1, state->missLeft, state->cannRight-1, state->missRight);
     if(isValidState(new_state)) {
       new_state->parent = state;
       state->addChild(new_state);
