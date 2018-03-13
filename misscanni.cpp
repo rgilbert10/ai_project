@@ -30,14 +30,25 @@ bool State::isValidState(State *state) {
         return false;
 }
 
-vector<State>* State::BFS() {
+vector<State*> State::BFS() {
 
 }
 
-void State::print() {
-
+void State::print(vector<State*> answer) {
+  for(auto it = answer.begin(); it != answer.end(); it++) {
+    cout << std::string((*it)->missLeft, 'M');
+    cout << std::string((*it)->cannLeft, 'C');
+    if((*it)->boat == 0) {
+      cout << "  |B    |  ";
+    } else {
+      cout << "  |    B|  ";
+    }
+    cout << std::string((*it)->missRight, 'M');
+    cout << std::string((*it)->cannRight, 'C') << endl;
+  }
 }
-vector<State>* State::Successor(State* state) {
+
+vector<State*> State::Successor(State* state) {
   if(boat == 0) {
     //Two Missionaries Cross
     State* new_state = new State(state->boat+1, state->cannLeft, state->missLeft-2, state->cannRight, state->missRight+2);
@@ -119,8 +130,11 @@ void State::addChild(State* state) {
 int main() {
     State *initialShit = new State(0, 3, 3, 0, 0);
     initialShit->Successor(initialShit);
-    vector<State> *answer = initialShit->BFS();
-
+    vector<State*> answer;
+    answer.push_back(initialShit);
+    //vector<State*> answer = initialShit->BFS();
+    initialShit->print(answer);
+    delete initialShit;
     //State initialShit(0, 3, 3, 0, 0);
 
     return 0;
