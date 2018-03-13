@@ -11,7 +11,7 @@ class State {
         vector<State*> BFS();
         vector<State*> Successor(State* state);
         void addChild(State* state);
-        void print();
+        void print(vector<State*> answer);
         int boat = 0;
         int cannLeft = 0;
         int missLeft = 0;
