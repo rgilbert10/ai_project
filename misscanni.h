@@ -8,8 +8,8 @@ class State {
         State(int b, int cL, int mL, int cR, int mR);
         bool isGoalState(State *state);
         bool isValidState(State *state);
-        vector<State>* BFS();
-        vector<State>* Successor(State* state);
+        vector<State*> BFS();
+        vector<State*> Successor(State* state);
         void addChild(State* state);
         void print();
         int boat = 0;
@@ -19,6 +19,8 @@ class State {
         int missRight = 0;
         vector<State*> children;
         State* parent;
+        vector<vector<State*>> Edge;
+        vector<unsigned char> visited;
 };
 
 

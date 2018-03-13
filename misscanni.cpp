@@ -30,13 +30,14 @@ bool State::isValidState(State *state) {
         return false;
 }
 
-vector<State>* State::BFS() {
-
+vector<State*> State::BFS() {
+  
 }
 
 void State::print() {
 
 }
+
 vector<State>* State::Successor(State* state) {
   if(boat == 0) {
     //Two Missionaries Cross
@@ -119,9 +120,7 @@ void State::addChild(State* state) {
 int main() {
     State *initialShit = new State(0, 3, 3, 0, 0);
     initialShit->Successor(initialShit);
-    vector<State> *answer = initialShit->BFS();
-
-    //State initialShit(0, 3, 3, 0, 0);
+    vector<State*> answer = initialShit->BFS();
 
     return 0;
 }
