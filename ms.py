@@ -16,6 +16,7 @@ https://www.codefellows.org/blog/implementing-a-singly-linked-list-in-python/
 
 masterList = []
 parent = {}
+visited = []
 
 class State:
     def __init__(self, boat, mLeft, cLeft, mRight, cRight, ID, parent):
@@ -29,19 +30,40 @@ class State:
 
 ''' Hard coded graph of all states '''
 def graph():
-    state = State("left", 3,3,0,0,0,None) # Beginning State, boat left - all on left
+    state = State("left", 3,3,0,0,1,None) # Beginning State, boat left - all on left
     listSet(state)
-    state = State("right", 3,2,0,1,1,0) # State 1 - boat right, one cannibal crosses
+    state = State("right", 3,2,0,1,2,1) # State 1 - boat right, one cannibal crosses
     listSet(state)
-    state = State("right", 2,2,1,1,2,0) # State 2 - one missionary and one cannibal crosses
+    state = State("right", 2,2,1,1,3,1) # State 2 - one missionary and one cannibal crosses
     listSet(state)
-    state = State("right", 1,3,2,0,3,0) # State 3 -
+    state = State("right", 3,1,0,2,4,1) # State 3 -
     listSet(state)
-    state = State("right", 2,3,1,0,4,0) # State 4 -
+    state = State("left", 3,2,0,1,5,4) # State 4 -
     listSet(state)
-    state = State("right", 3,1,0,2,5,0) # State 5 - one missionary and one cannibal crosses
+    state = State("right", 3,1,0,2,6,5) # State 5 -
     listSet(state)
-
+    state = State("right", 2,1,1,1,7,5) # State 6 -
+    listSet(state)
+    state = State("right", 3,0,0,3,8,5) # State 6 -
+    listSet(state)
+    state = State("left", 3,1,0,2,9,8) # State 6 -
+    listSet(state)
+    state = State("right", 1,1,2,2,10,9) # State 6 -
+    listSet(state)
+    state = State("left", 2,2,1,1,11,10) # State 6 -
+    listSet(state)
+    state = State("right", 0,2,3,1,12,11) # State 6 -
+    listSet(state)
+    state = State("left", 0,3,3,0,13,12) # State 6 -
+    listSet(state)
+    state = State("right", 0,1,3,2,14,13) # State 6 -
+    listSet(state)
+    state = State("left", 1,1,2,1,15,14) # State 6 -
+    listSet(state)
+    state = State("left", 0,2,3,1,16,14) # State 6 -
+    listSet(state)
+    state = State("right", 0,0,3,3,17,16) # State 6 -
+    listSet(state)
 
 def listSet(state):
     masterList.append(state) # add to master list
@@ -52,20 +74,60 @@ def printList():
         print ("ID: %s | Boat: %s | mLeft: %s | cLeft: %s | mRight: %s | cRight: %s | Parent: %s"
         % (x.ID, x.boat, x.mLeft, x.cLeft, x.mRight, x.cRight, x.parent))
     print parent
+    print visited
 
 def BFS(ID):
-    visited = []
     queue = []
     queue.append(ID)
     while queue:
         state = queue.pop(0)
+        if(isGoal(state)):
+            return state
         if state not in visited:
             visited.append(state)
             for key, value in parent.items(): # key is the state ID, value is the parent
                 if state == value: queue.append(key)
 
+def isGoal(state):
+    for x in masterList:
+        if x.ID == state:
+            state = x
+    if state.mLeft == 0 and state.cLeft == 0 and \
+    state.mRight == 3 and state.cRight == 3:
+        return True
+    else:
+        return False
+
+def solution(state):
+    answer = []
+    answer.append(state)
+    for x in masterList:
+        if x.ID == state:
+            state = x
+    parent = state.parent
+    while parent:
+        answer.append(parent)
+        for x in masterList:
+            if x.ID == parent:
+                parent = x
+        parent = parent.parent
+
+    temp = []
+    for i in reversed(answer):
+        for x in masterList:
+            if x.ID == i:
+                temp.append(x)
+    print ("mc            mc")
+    for t in temp:
+
+        if t.boat == "left":
+            print ("%s%s  |B    |   %s%s" % (t.mLeft, t.cLeft, t.mRight, t.cRight))
+        else:
+            print ("%s%s  |    B|   %s%s" % (t.mLeft, t.cLeft, t.mRight, t.cRight))
+
 graph()
-printList()
-BFS(0)
+state = BFS(1)
+#printList()
+solution(state)
 
 # Run BFS on graph
