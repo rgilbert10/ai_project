@@ -1,17 +1,14 @@
-''' Python implemention of the missionaries and
+'''
+Rachel Gilbert
+Briana Jakell
+Brandon Smith
+
+CSCI 580 - Project 1
+Python implemention of the missionaries and
 cannibals problem.
 References:
-BFS:
-https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
-https://codereview.stackexchange.com/questions/135156/bfs-implementation-in-python-3
-https://gist.github.com/jamiees2/5527131
 http://interactivepython.org/runestone/static/pythonds/Graphs/ImplementingBreadthFirstSearch.html
-Miss/Cann Implement:
 https://github.com/findkim/The-Missionary-and-Cannibals-Problem/blob/master/missionaries_cannibals.py
-https://github.com/marianafranco/missionaries-and-cannibals/blob/master/python/missionaries_and_cannibals.py
-http://dhruvbird.blogspot.com/2009/11/missionaries-and-cannibals-problem.html
-Other:
-https://www.codefellows.org/blog/implementing-a-singly-linked-list-in-python/
 '''
 
 masterList = []
@@ -28,7 +25,6 @@ class State:
         self.ID = ID
         self.parent = parent
 
-''' Hard coded graph of all states '''
 def graph():
     state = State("left", 3,3,0,0,1,None) # Beginning State, boat left - all on left
     listSet(state)
@@ -119,7 +115,6 @@ def solution(state):
                 temp.append(x)
     print ("mc            mc")
     for t in temp:
-
         if t.boat == "left":
             print ("%s%s  |B    |   %s%s" % (t.mLeft, t.cLeft, t.mRight, t.cRight))
         else:
